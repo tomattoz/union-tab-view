@@ -177,62 +177,6 @@ UnionTabView(selection: $selectedTab, tabs: RootTab.allCases) {
 }
 ```
 
-## Additional Components
-
-### TabItem Protocol
-
-For more structured tab definitions, conform to the `TabItem` protocol:
-
-```swift
-enum MyTab: String, CaseIterable, TabItem {
-    case home = "Home"
-    case settings = "Settings"
-    
-    var symbol: String {
-        switch self {
-        case .home: "house.fill"
-        case .settings: "gearshape.fill"
-        }
-    }
-    
-    var actionSymbol: String {
-        switch self {
-        case .home: "house"
-        case .settings: "gearshape"
-        }
-    }
-}
-```
-
-### GlassTabBar (iOS 26+ Only)
-
-For standalone glass tab bar usage outside of `UnionTabView`:
-
-```swift
-@available(iOS 26, *)
-GlassTabBar(activeTab: $selectedTab) { tab, isSelected in
-    VStack(spacing: 4) {
-        Image(systemName: isSelected ? tab.symbol : tab.actionSymbol)
-            .font(.title3)
-        Text(tab.rawValue)
-            .font(.system(size: 10, weight: .medium))
-    }
-    .foregroundStyle(isSelected ? .primary : .secondary)
-}
-.padding(.horizontal, 20)
-```
-
-### View Modifiers
-
-#### `.blurFade(_:)`
-
-Applies a blur and fade effect based on a boolean:
-
-```swift
-Image(systemName: "star.fill")
-    .blurFade(isVisible)
-```
-
 ## Architecture
 
 The package uses a `UISegmentedControl` as the underlying selection mechanism, which provides:

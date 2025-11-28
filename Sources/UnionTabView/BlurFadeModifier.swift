@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public extension View {
+extension View {
     @ViewBuilder
     func blurFade(_ status: Bool) -> some View {
         self
