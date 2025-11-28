@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct AdaptiveTabView<Tab: Hashable, Content: View, TabItemContent: View>: View {
+public struct UnionTabView<Tab: Hashable, Content: View, TabItemContent: View>: View {
     @Binding var selection: Tab
     let tabs: [Tab]
     let barTint: Color
@@ -21,13 +21,13 @@ public struct AdaptiveTabView<Tab: Hashable, Content: View, TabItemContent: View
         tabs: [Tab],
         barTint: Color = .gray.opacity(0.15),
         @ViewBuilder content: () -> Content,
-        @ViewBuilder tabItemView: @escaping (Tab, Bool) -> TabItemContent
+        @ViewBuilder item: @escaping (Tab, Bool) -> TabItemContent
     ) {
         self._selection = selection
         self.tabs = tabs
         self.barTint = barTint
         self.content = content()
-        self.tabItemView = tabItemView
+        self.tabItemView = item
     }
     
     public var body: some View {
@@ -161,7 +161,7 @@ struct InteractiveSegmentedControl: UIViewRepresentable {
 
 public extension View {
     @ViewBuilder
-    func adaptiveTab<Tab: Hashable>(_ tab: Tab) -> some View {
+    func unionTab<Tab: Hashable>(_ tab: Tab) -> some View {
         if #available(iOS 26, *) {
             self
                 .toolbarVisibility(.hidden, for: .tabBar)
