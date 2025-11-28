@@ -53,8 +53,8 @@ public struct AdaptiveTabView<Tab: Hashable, Content: View, TabItemContent: View
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             glassTabBar
-                .padding(.horizontal, 16)
-                .padding(.bottom, 4)
+                .padding(.horizontal, 20)
+                .ignoresSafeArea(.container, edges: .bottom)
         }
     }
     
@@ -193,7 +193,7 @@ public extension View {
     
     private var systemTabBarHeight: CGFloat {
         if #available(iOS 26, *) {
-            return 49
+            return 56
         } else {
             let tabBar = UITabBar()
             tabBar.sizeToFit()
