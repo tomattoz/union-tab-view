@@ -14,15 +14,6 @@ public struct AdaptiveTabView<Tab: Hashable, Content: View, TabItemContent: View
     let content: Content
     let tabItemView: (Tab, Bool) -> TabItemContent
     
-    private var tabBarHeight: CGFloat {
-        if #available(iOS 26, *) {
-            return 49
-        } else {
-            let tabBar = UITabBar()
-            tabBar.sizeToFit()
-            return tabBar.frame.height
-        }
-    }
     
     public init(
         selection: Binding<Tab>,
@@ -51,10 +42,9 @@ public struct AdaptiveTabView<Tab: Hashable, Content: View, TabItemContent: View
         TabView(selection: $selection) {
             content
         }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
+        .safeAreaInset(edge: .bottom) {
             glassTabBar
                 .padding(.horizontal, 20)
-                .ignoresSafeArea(.container, edges: .bottom)
         }
     }
     
@@ -160,12 +150,9 @@ struct InteractiveSegmentedControl: UIViewRepresentable {
 
 public extension View {
     @ViewBuilder
-    func adaptiveTab<Tab: Hashable>(_ tab: Tab, height: CGFloat? = nil) -> some View {
+    func adaptiveTab<Tab: Hashable>(_ tab: Tab) -> some View {
         if #available(iOS 26, *) {
             self
-                .safeAreaBar(edge: .bottom, spacing: 0) {
-                    GlassTabBarSpacer(height: height ?? systemTabBarHeight)
-                }
                 .toolbarVisibility(.hidden, for: .tabBar)
                 .tag(tab)
         } else {
@@ -174,12 +161,9 @@ public extension View {
     }
     
     @ViewBuilder
-    func adaptiveTab<Tab: Hashable>(_ tab: Tab, title: String, systemImage: String, height: CGFloat? = nil) -> some View {
+    func adaptiveTab<Tab: Hashable>(_ tab: Tab, title: String, systemImage: String) -> some View {
         if #available(iOS 26, *) {
             self
-                .safeAreaBar(edge: .bottom, spacing: 0) {
-                    GlassTabBarSpacer(height: height ?? systemTabBarHeight)
-                }
                 .toolbarVisibility(.hidden, for: .tabBar)
                 .tag(tab)
         } else {
@@ -188,16 +172,6 @@ public extension View {
                     Label(title, systemImage: systemImage)
                 }
                 .tag(tab)
-        }
-    }
-    
-    private var systemTabBarHeight: CGFloat {
-        if #available(iOS 26, *) {
-            return 56
-        } else {
-            let tabBar = UITabBar()
-            tabBar.sizeToFit()
-            return tabBar.frame.height
         }
     }
 }
