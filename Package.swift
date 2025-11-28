@@ -11,7 +11,7 @@ import PackageDescription
 let package = Package(
     name: "union-tab-bar",
     platforms: [
-        .iOS(.v18)
+        .iOS(.v17)
     ],
     products: [
         .library(
