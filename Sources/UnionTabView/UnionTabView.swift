@@ -214,22 +214,20 @@ struct InteractiveSegmentedControl: UIViewRepresentable {
 }
 
 public extension View {
-    /// Marks this view as content for a specific tab in a `UnionTabView`.
+    /// Marks this view as the content for a specific tab.
     ///
-    /// Apply this modifier to each tab's content view inside `UnionTabView`. On iOS 26+, it hides the system
-    /// tab bar and adds proper safe area spacing for the floating glass tab bar. On iOS 17-25, it simply
-    /// applies the `.tag()` modifier.
+    /// Apply this to each tab's content view inside `UnionTabView`:
     ///
     /// ```swift
-    /// UnionTabView(selection: $tab, tabs: [.home, .settings]) {
-    ///     HomeView().unionTab(Tab.home)
-    ///     SettingsView().unionTab(Tab.settings)
+    /// UnionTabView(selection: $selectedTab, tabs: [.home, .profile]) {
+    ///     HomeView().unionTab(.home)
+    ///     ProfileView().unionTab(.profile)
     /// } item: { tab, isSelected in
-    ///     // tab item content
+    ///     // custom tab item view
     /// }
     /// ```
     ///
-    /// - Parameter tab: The tab value this view represents.
+    /// - Parameter tab: The tab value this content represents.
     @ViewBuilder
     public func unionTab<Tab: Hashable>(_ tab: Tab) -> some View {
         if #available(iOS 26, *) {
