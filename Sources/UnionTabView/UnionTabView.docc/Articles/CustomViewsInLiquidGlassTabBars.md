@@ -117,6 +117,22 @@ AsyncImage(url: URL(string: "https://example.com/avatar.jpg")) { phase in
 .clipShape(Circle())
 ```
 
+## Full-Width Tab Bar
+
+By default, the tab bar sizes to fit its content and centers on screen. To create a full-width tab bar, apply `.frame(maxWidth: .infinity)` to your tab item views:
+
+```swift
+UnionTabView(selection: $selectedTab, tabs: tabs) {
+    // content...
+} item: { tab, isSelected in
+    VStack {
+        Image(systemName: tab.icon)
+        Text(tab.title)
+    }
+    .frame(maxWidth: .infinity) // Makes tab bar full-width
+}
+```
+
 ## Compatibility
 
 UnionTabView works on iOS 17+. On iOS 26+ you get the liquid glass effect. On iOS 17-25 you get a clean custom tab bar. Same code, same API.

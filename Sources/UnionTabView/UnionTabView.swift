@@ -58,7 +58,7 @@ public struct UnionTabView<Tab: Hashable, Content: View, TabItemContent: View>: 
         self.content = content()
         self.tabItemView = item
     }
-    
+
     public var body: some View {
         if #available(iOS 26, *) {
             iOS26Body
@@ -94,11 +94,11 @@ public struct UnionTabView<Tab: Hashable, Content: View, TabItemContent: View>: 
         HStack(spacing: 0) {
             ForEach(Array(tabs.enumerated()), id: \.element) { index, tab in
                 tabItemView(tab, selectedIndex == index)
-                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 4)
+                    .frame(minWidth: 86)
+                    .frame(height: 58)
             }
         }
-        .frame(height: 54)
         .clipShape(Capsule())
         .allowsHitTesting(false)
         .background {
@@ -143,11 +143,11 @@ public struct UnionTabView<Tab: Hashable, Content: View, TabItemContent: View>: 
         HStack(spacing: 0) {
             ForEach(Array(tabs.enumerated()), id: \.element) { index, tab in
                 tabItemView(tab, selectedIndex == index)
-                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 4)
+                    .frame(minWidth: 86)
+                    .frame(height: 58)
             }
         }
-        .frame(height: 54)
         .clipShape(Capsule())
         .allowsHitTesting(false)
         .padding(4)
