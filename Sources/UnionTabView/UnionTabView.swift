@@ -229,7 +229,7 @@ public extension View {
     ///
     /// - Parameter tab: The tab value this content represents.
     @ViewBuilder
-    public func unionTab<Tab: Hashable>(_ tab: Tab) -> some View {
+    func unionTab<Tab: Hashable>(_ tab: Tab) -> some View {
         if #available(iOS 26, *) {
             self
                 .toolbarVisibility(.hidden, for: .tabBar)

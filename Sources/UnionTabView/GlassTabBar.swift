@@ -304,6 +304,7 @@ struct FloatingTabIndicator<Tab: TabItem>: View {
     .background(Color.gray.opacity(0.2))
 }
 
+@available(iOS 17, *)
 #Preview("Floating Tab Indicator") {
     @Previewable @State var activeTab: CustomTab = .home
     
